@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 
 void PrintIntroduction(int Difficulty)
 {
@@ -13,12 +14,12 @@ bool PlayGame(int Difficulty)
 {
     PrintIntroduction(Difficulty);
     // Declare 3 number code
-    const int CodeA = 4;
-    const int CodeB = 8;
-    const int CodeC = 10;
+    const int CodeA = rand() % Difficulty + Difficulty;
+    const int CodeB = rand() % Difficulty + Difficulty;
+    const int CodeC = rand() % Difficulty + Difficulty;
 
     /*
-    this is for multi line
+    this is for  multi line
     comment example
     */
 
@@ -41,20 +42,24 @@ bool PlayGame(int Difficulty)
     // Check to see if guess is correct
     if (GuessSum == CodeSum && GuessProduct == CodeProduct)
     {
-        std::cout << "\n-Morpheus- \"You Saved US! I can't believe you saved us again!!\n\"";
+        std::cout << "\n\n***-Morpheus- \"That was a close one, great job Neo!***\"\n";
         return true;
     }
     else
     {
-        std::cout << "\n-Agent Smith- \"MUHAHAHAhahaha, BOOM. Your finished Neo.  I. AM. INEVITABLE.\"";
+        std::cout << "\n\n***-Agent Smith- \"MUHAHAHAhahaha, BOOM. Try again Mr. Anderson..***\"\n";
         return false;
     }
 }
 
 int main()
 {
+    srand(time(NULL)); // create new random sequence based on time of day
+
     int LevelDifficulty = 1;
-    while (true)
+    int const MaxDifficulty = 5;
+
+    while (LevelDifficulty <= MaxDifficulty) // loop game until all levels complete
     {
         bool bLevelComplete = PlayGame(LevelDifficulty);
         std::cin.clear();
@@ -65,6 +70,8 @@ int main()
             ++LevelDifficulty;
         }
     }
+
+    std::cout << "\n\n***-Morpheus- \"You Saved US! I can't believe it...You saved us again!!\"***\n";
 
     return 0;
 }
